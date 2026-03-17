@@ -1,4 +1,4 @@
-argin: 0;
+body{margin: 0;
   background: rgb(200, 200, 200);
   font-family: sans-serif; /* Added for cleaner look */
 }
@@ -74,7 +74,7 @@ footer {
   margin-top: 20px; /* Added spacing */
 }
 
-ol {
+ul {
   font-weight: bold;
 }
 
