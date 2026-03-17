@@ -1,5 +1,4 @@
-body {
-  margin: 0;
+argin: 0;
   background: rgb(200, 200, 200);
   font-family: sans-serif; /* Added for cleaner look */
 }
@@ -41,7 +40,7 @@ section:hover {
 }
 
 /* Apply animation to text elements */
-h2, ol, p {
+h2, h1, ul, p {
   animation: fadeIn 1.2s ease-out forwards;
 }
 
