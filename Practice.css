@@ -1,0 +1,94 @@
+body {
+  margin: 0;
+  background: rgb(200, 200, 200);
+  font-family: sans-serif; /* Added for cleaner look */
+}
+
+header {
+  background: rgb(20, 70, 255);
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+/* --- THE "TOUCH/HOVER" EFFECT --- */
+section {
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  background: rgb(255, 255, 255);
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
+
+section:hover {
+  transform: translateY(-10px); /* Moves it up */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Deeper shadow when lifted */
+}
+
+/* --- THE "FADE IN" ANIMATION --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply animation to text elements */
+h2, ol, p {
+  animation: fadeIn 1.2s ease-out forwards;
+}
+
+/* --- REST OF YOUR CODE --- */
+.Course {
+  background: rgb(20, 70, 255);
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  height: 100px;
+  align-content: center;
+  width: 100%;
+  margin-bottom: 20px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: rgb(20, 70, 255);
+  text-align: center;
+  font-weight: bold;
+}
+
+footer {
+  background: rgb(0, 0, 0);
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  padding: 30px;
+  margin-top: 20px; /* Added spacing */
+}
+
+ol {
+  font-weight: bold;
+}
+
+.home {
+  background: rgb(20, 70, 255);
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  height: 50px;
+  align-content: center;
+  width: 100%;
+  margin-bottom: 20px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
