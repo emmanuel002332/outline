@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Course Outline Practice</title>
   <link rel="stylesheet" href="practice.css">
+  <link rel="manifest" href="manifest.json">
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js')
+      .then(() => console.log("Course App Ready!"));
+  }
+</script>
 </head>
 <body>
   <header>
