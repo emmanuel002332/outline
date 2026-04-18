@@ -1,0 +1,25 @@
+{
+  "id": "course-outline-app",
+  "name": "Year One Course Outline",
+  "short_name": "CourseOutline",
+  "description": "Quick access to 2025/2026 course outlines.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#4facfe",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./ei_1758533330427-removebg-preview2_1-ezgif.com-jpg-to-png-converter.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./ei_1758533330427-removebg-preview2_1-ezgif.com-jpg-to-png-converter.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
