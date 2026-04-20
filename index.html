@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Course Outline Practice</title>
-  <link rel="stylesheet" href="practice.css">
+  <title>Course Outline</title>
+  <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json">
 <script>
   if ('serviceWorker' in navigator) {
@@ -15,31 +15,97 @@
 </head>
 <body>
   <header>
-  <h1>YEAR ONE COURSE OUTLINE 2025/2026 ACADEMIC SESSION</h1>
+    <h1>YEAR ONE COURSE OUTLINE 2025/2026 ACADEMIC SESSION</h1>
   </header>
+
+  <div id="install-container" style="text-align: center; margin: 20px 0; display: none;">
+  <button id="install-btn" class="home" style="background: linear-gradient(45deg, #4facfe, #00f2fe); border: none; padding: 15px 30px; font-weight: bold; cursor: pointer; border-radius: 8px;">
+    📥 Install Course App
+  </button>
+  <div id="install-ios-hint" style="display: none; font-size: 14px; margin-top: 10px; color: #555;">
+    On iPhone: Tap Share → Add to Home Screen
+  </div>
+  </div>
+  
   <section>
-  <h2>Quick Search</h2>
-  <form action="https://www.google.com/search" method="GET" target="_blank">
-    <input type="text" placeholder="Search Google" name="q" required>
-    <br><br>
-    <button type="submit" class="home">Google Search</button>
-  </form>
+    <h2>Quick Search</h2>
+    <form action="https://www.google.com/search" method="GET" target="_blank">
+      <input type="text" placeholder="Search Google" name="q" required>
+      <br><br>
+      <button type="submit" class="home">Google Search</button>
+    </form>
   </section>
   
   <section>
     <h2>CLICK TO SEE COURSE OUTLINE</h2>
-    <a href="1st.html"><button class="Course">MTH 120.1</button></a>
-    
-    <a href="2nd.html"><button class="Course">MTH 110.1</button></a>
-    
-    <a href="3rd.html"><button class="Course">CHEM 130</button></a>
-    
-    <a href="4th.html"><button class="Course">PHYSICS 101.1</button></a>
-    
-    <a href="5th.html"><button class="Course">GES 111.1</button></a>
-    
-    <a href="6th.html"><button class="Course">ENG 101.1</button></a>
+    <a href="1st.html"><button class="Course">ENG 103.2</button></a>
+    <a href="2nd.html"><button class="Course">ENG 104.2</button></a>
+    <a href="3rd.html"><button class="Course">GET 102.2</button></a>
+    <a href="4th.html"><button class="Course">CHM 131.2</button></a>
+    <a href="5th.html"><button class="Course">MTH 124.2</button></a>
+    <a href="6th.html"><button class="Course">PHYSICS 112.2</button></a>
   </section>
+
+  
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  let deferredPrompt;
+  const installContainer = document.getElementById('install-container');
+  const installBtn = document.getElementById('install-btn');
+  const iosHint = document.getElementById('install-ios-hint');
+
+  // Hide everything if already running as installed PWA
+  if (window.matchMedia('(display-mode: standalone)').matches) {
+    installContainer.style.display = 'none';
+    return;
+  }
+
+  // iOS detection - beforeinstallprompt doesn't fire on iOS
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const isInStandaloneMode = window.navigator.standalone === true;
+  
+  if (isIOS && !isInStandaloneMode) {
+    // Show custom instructions for iOS users
+    installContainer.style.display = 'block';
+    iosHint.style.display = 'block';
+    installBtn.style.display = 'none'; // button won't work on iOS
+  }
+
+  // 1. Listen for the 'beforeinstallprompt' event - Chrome/Edge/Android
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    // Show our custom install button, hide iOS hint
+    installContainer.style.display = 'block';
+    installBtn.style.display = 'inline-block';
+    iosHint.style.display = 'none';
+  });
+
+  // 2. When the user clicks our button
+  installBtn.addEventListener('click', async () => {
+    if (!deferredPrompt) return;
+    
+    // Show the install prompt
+    deferredPrompt.prompt();
+    // Wait for the user to respond to the prompt
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`User response to install: ${outcome}`);
+    // We've used the prompt, so clear it
+    deferredPrompt = null;
+    // Hide our button again
+    installContainer.style.display = 'none';
+  });
+
+  // 3. Hide the button if the app is successfully installed
+  window.addEventListener('appinstalled', () => {
+    installContainer.style.display = 'none';
+    deferredPrompt = null;
+    console.log('App was installed successfully!');
+  });
+});
+    </script>
+  
   <footer>
     <p>Study for your exam</p>
     <p>GOOD LUCK</p>
