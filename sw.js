@@ -1,44 +1,43 @@
-const CACHE_NAME = 'course-outline-v2'; // bump this on every deploy
+const CACHE_NAME = 'course-outline-v1';
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/style.css',
-  '/manifest.json',
-  '/1st.html',
-  '/2nd.html',
-  '/3rd.html',
-  '/4th.html',
-  '/5th.html',
-  '/6th.html'
+  './',
+  './index.html',
+  './practice.css',
+  './manifest.json',
+  './1st.html',
+  './2nd.html',
+  './3rd.html',
+  './4th.html',
+  './5th.html',
+  './6th.html'
 ];
 
-// Install - cache core assets
+// 1. Install & Cache
 self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return Promise.all(
-        ASSETS.map(url => cache.add(url).catch(err => console.warn(`Failed to cache ${url}`, err)))
-      );
+      return cache.addAll(ASSETS);
     })
   );
-  self.skipWaiting();
 });
 
-// Activate - delete old caches
+// 2. Cleanup old caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
-      return Promise.all(
-        keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
-      );
+      return Promise.all(keys.map(key => {
+        if (key !== CACHE_NAME) return caches.delete(key);
+      }));
     })
   );
-  self.clients.claim();
 });
 
-// Fetch - cache first, fallback to network
+// 3. Serve from cache, then network
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request).then((res) => res || fetch(event.request))
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
+    })
   );
 });
