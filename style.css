@@ -1,10 +1,11 @@
-body{margin: 0;
-  background: rgb(200, 200, 200);
+body {
+  margin: 0;
+  background: rgb(40, 30, 60);
   font-family: sans-serif; /* Added for cleaner look */
 }
 
 header {
-  background: rgb(20, 70, 255);
+  background: linear-gradient(135deg, #4f46e5, #3b82f6);
   color: white;
   padding: 20px;
   text-align: center;
@@ -15,7 +16,7 @@ section {
   margin: 20px;
   padding: 20px;
   border-radius: 10px;
-  background: rgb(255, 255, 255);
+  background: rgb(60, 50, 90);
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
   
   cursor: pointer;
@@ -40,19 +41,19 @@ section:hover {
 }
 
 /* Apply animation to text elements */
-h2, h1, ul, p {
+h2, ol, p {
   animation: fadeIn 1.2s ease-out forwards;
 }
 
 /* --- REST OF YOUR CODE --- */
 .Course {
-  background: rgb(20, 70, 255);
+  background: linear-gradient(135deg, #4f46e5, #3b82f6);
   border: none;
-  border-radius: 10px;
+  border-radius: 20px;
   padding: 10px;
   font-weight: bold;
   color: rgb(255, 255, 255);
-  height: 100px;
+  height: 40px;
   align-content: center;
   width: 100%;
   margin-bottom: 20px;
@@ -60,13 +61,13 @@ h2, h1, ul, p {
 }
 
 h2 {
-  color: rgb(20, 70, 255);
+  color: rgb(255, 255, 255);
   text-align: center;
   font-weight: bold;
 }
 
 footer {
-  background: rgb(0, 0, 0);
+  background: rgb(10,5, 20);
   text-align: center;
   font-weight: bold;
   color: white;
@@ -74,12 +75,12 @@ footer {
   margin-top: 20px; /* Added spacing */
 }
 
-ul {
+ol {
   font-weight: bold;
 }
 
 .home {
-  background: rgb(20, 70, 255);
+  background: linear-gradient(135deg, #4f46e5, #3b82f6);
   border: none;
   border-radius: 10px;
   padding: 10px;
@@ -92,10 +93,13 @@ ul {
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
 }
 input{
-  height: 30px;
+  height: 40px;
   width: 100%;
   align-content: center;
-  border-radius: 4px;
-  border-color: rgb(20, 70, 255);
+  border-radius: 25px;
+  border-color: linear-gradient(135deg, #4f46e5, #3b82f6);
   font-size: 17px;
+}
+ul{
+  color: white;
 }
