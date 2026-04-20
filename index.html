@@ -13,7 +13,7 @@
   </header>
   
   <div id="install-container" style="text-align: center; margin: 20px 0; display: none;">
-    <button id="install-btn" style="background: linear-gradient(45deg, #4facfe, #00f2fe); border: none; padding: 15px 30px; font-weight: bold; cursor: pointer; border-radius: 8px;">
+    <button id="install-btn" class="home" style="background: linear-gradient(45deg, #4facfe, #00f2fe); border: none; padding: 15px 30px; font-weight: bold; cursor: pointer;">
       📥 Install Course App
     </button>
   </div>
@@ -21,7 +21,7 @@
   <section>
     <h2>Quick Search</h2>
     <form action="https://www.google.com/search" method="GET" target="_blank">
-      <input type="text" placeholder="Search Google" name="q" required style="padding: 10px; width: 80%;">
+      <input type="text" placeholder="Search Google" name="q" required>
       <br><br>
       <button type="submit" class="home">Google Search</button>
     </form>
@@ -29,30 +29,28 @@
   
   <section>
     <h2>CLICK TO SEE COURSE OUTLINE</h2>
-    <a href="1st.html" class="Course-Link">ENG 103.2</a>
-    <a href="2nd.html" class="Course-Link">ENG 104.2</a>
-    <a href="3rd.html" class="Course-Link">GET 102.2</a>
-    <a href="4th.html" class="Course-Link">CHM 131.2</a>
-    <a href="5th.html" class="Course-Link">MTH 124.2</a>
-    <a href="6th.html" class="Course-Link">PHYSICS 112.2</a>
+    <a href="1st.html"><button class="Course">ENG 103.2</button></a>
+    <a href="2nd.html"><button class="Course">ENG 104.2</button></a>
+    <a href="3rd.html"><button class="Course">GET 102.2</button></a>
+    <a href="4th.html"><button class="Course">CHM 131.2</button></a>
+    <a href="5th.html"><button class="Course">MTH 124.2</button></a>
+    <a href="6th.html"><button class="Course">PHYSICS 112.2</button></a>
   </section>
   
   <footer>
     <p>Study for your exam</p>
     <p>GOOD LUCK</p>
   </footer>
-
+  
   <script>
-    // 1. Register Service Worker
+    // 1. REGISTER SERVICE WORKER
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
-          .then(() => console.log("Course App Ready!"))
-          .catch(err => console.log("Service Worker Failed", err));
-      });
+      navigator.serviceWorker.register('./sw.js')
+        .then(() => console.log("Course App Ready!"))
+        .catch(err => console.log("SW Registration failed", err));
     }
 
-    // 2. Install Logic
+    // 2. INSTALL LOGIC
     let deferredPrompt;
     const installContainer = document.getElementById('install-container');
     const installBtn = document.getElementById('install-btn');
@@ -67,7 +65,6 @@
       if (deferredPrompt) {
         deferredPrompt.prompt();
         const { outcome } = await deferredPrompt.userChoice;
-        console.log(`User response: ${outcome}`);
         deferredPrompt = null;
         installContainer.style.display = 'none';
       }
@@ -75,7 +72,6 @@
 
     window.addEventListener('appinstalled', () => {
       installContainer.style.display = 'none';
-      console.log('App installed!');
     });
   </script>
 </body>
