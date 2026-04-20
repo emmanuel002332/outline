@@ -1,4 +1,4 @@
-const CACHE_NAME = 'course-outline-v1';
+const CACHE_NAME = 'course-outline-v2';
 const ASSETS = [
   './',
   './index.html',
