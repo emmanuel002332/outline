@@ -2,7 +2,7 @@ const CACHE_NAME = 'course-outline-v1';
 const ASSETS = [
   './',
   './index.html',
-  './practice.css',
+  './style.css',
   './manifest.json',
   './1st.html',
   './2nd.html',
