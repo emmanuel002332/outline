@@ -6,6 +6,12 @@
   <title>Course Outline</title>
   <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json">
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js')
+      .then(() => console.log("Course App Ready!"));
+  }
+</script>
 </head>
 <body>
   <header>
@@ -13,10 +19,10 @@
   </header>
   
   <div id="install-container" style="text-align: center; margin: 20px 0; display: none;">
-    <button id="install-btn" class="home" style="background: linear-gradient(45deg, #4facfe, #00f2fe); border: none; padding: 15px 30px; font-weight: bold; cursor: pointer;">
-      📥 Install Course App
-    </button>
-  </div>
+  <button id="install-btn" class="home" style="background: linear-gradient(45deg, #4facfe, #00f2fe); border: none; padding: 15px 30px; font-weight: bold; cursor: pointer;">
+    📥 Install Course App
+  </button>
+</div>
   
   <section>
     <h2>Quick Search</h2>
@@ -43,36 +49,42 @@
   </footer>
   
   <script>
-    // 1. REGISTER SERVICE WORKER
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./sw.js')
-        .then(() => console.log("Course App Ready!"))
-        .catch(err => console.log("SW Registration failed", err));
-    }
+  let deferredPrompt;
+  const installContainer = document.getElementById('install-container');
+  const installBtn = document.getElementById('install-btn');
 
-    // 2. INSTALL LOGIC
-    let deferredPrompt;
-    const installContainer = document.getElementById('install-container');
-    const installBtn = document.getElementById('install-btn');
+  // 1. Listen for the 'beforeinstallprompt' event
+  window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent the browser's default mini-bar from showing
+    e.preventDefault();
+    // Save the event so it can be triggered later
+    deferredPrompt = e;
+    // Show our custom install button
+    installContainer.style.display = 'block';
+  });
 
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      installContainer.style.display = 'block';
-    });
-
-    installBtn.addEventListener('click', async () => {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        deferredPrompt = null;
-        installContainer.style.display = 'none';
-      }
-    });
-
-    window.addEventListener('appinstalled', () => {
+  // 2. When the user clicks our button
+  installBtn.addEventListener('click', async () => {
+    if (deferredPrompt) {
+      // Show the install prompt
+      deferredPrompt.prompt();
+      // Wait for the user to respond to the prompt
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log(`User response to install: ${outcome}`);
+      // We've used the prompt, so clear it
+      deferredPrompt = null;
+      // Hide our button again
       installContainer.style.display = 'none';
-    });
-  </script>
+    }
+  });
+
+  // 3. Hide the button if the app is successfully installed
+  window.addEventListener('appinstalled', () => {
+    installContainer.style.display = 'none';
+    deferredPrompt = null;
+    console.log('App was installed successfully!');
+  });
+</script>
+
 </body>
 </html>
